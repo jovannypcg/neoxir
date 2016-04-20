@@ -3,6 +3,8 @@
 use Mix.Config
 
 config :neoxir, neo4j_url: "http://localhost:7474"
+config :neoxir, neo4j_user: "neo4j"
+config :neoxir, neo4j_pass: "cugj4046"
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
