@@ -1,0 +1,2 @@
+defmodule Neoxir do
+end
