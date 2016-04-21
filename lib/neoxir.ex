@@ -1,7 +1,7 @@
 defmodule Neoxir do
   @neo4j_url Application.get_env(:neoxir, :neo4j_url)
-  @neo4j_user Application.get_env(:neoxir, :neo4j_user)
-  @neo4j_pass Application.get_env(:neoxir, :neo4j_pass)
+
+  import Neoxir.Request, only: [headers: 0]
 
   @moduledoc """
   Provides functions to play with Neo4j, such as creating nodes, labes,
@@ -20,19 +20,4 @@ defmodule Neoxir do
   end
 
   defp json_properties({:ok, body}), do: body
-
-  defp auth do
-    encoded = @neo4j_user <> ":" <> @neo4j_pass
-      |> Base.encode64
-
-    "Basic " <> encoded
-  end
-
-  defp headers do
-    %{
-      "Content-Type" => "application/json; charset=UTF-8",
-      "Authorization" => auth,
-      "Accept": "application/json; charset=UTF-8"
-    }
-  end
 end
