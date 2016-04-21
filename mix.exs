@@ -29,7 +29,7 @@ defmodule Neoxir.Mixfile do
   defp deps do
     [
       { :httpoison, "~> 0.8.3" },
-      { :jsx, "~> 2.8" }
+      { :poison, "~> 2.1" }
     ]
   end
 end
