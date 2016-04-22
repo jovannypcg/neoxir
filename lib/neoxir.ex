@@ -11,7 +11,7 @@ defmodule Neoxir do
   @doc """
   Creates a single node in Neo4j
   """
-  def create_node(properties \\ %{}) do
+  def create(properties \\ %{}) do
     {:ok, request_body } = Poison.encode(properties)
 
     HTTPoison.post!(@neo4j_url <> "/db/data/node", request_body, headers)
@@ -24,10 +24,10 @@ defmodule Neoxir do
   Creates a single node with a label in Neo4j
   """
   def create(properties, label) do
-    create_node(properties)
+    create(properties)
       |> node_id_from_response
       |> set_node_label(label)
-      |> get_node
+      |> fetch
   end
 
   @doc """
