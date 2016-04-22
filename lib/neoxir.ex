@@ -23,7 +23,7 @@ defmodule Neoxir do
   @doc """
   Creates a single node with a label in Neo4j
   """
-  def create_node(properties, label) do
+  def create(properties, label) do
     create_node(properties)
       |> node_id_from_response
       |> set_node_label(label)
@@ -33,8 +33,20 @@ defmodule Neoxir do
   @doc """
   Gets a single node from the database
   """
-  def get_node(node_id) do
+  def fetch(node_id) do
     url = @neo4j_url <> "/db/data/node/#{node_id}"
+
+    HTTPoison.get!(url, headers)
+      |> response_body
+      |> Poison.decode
+      |> poison_decoded_value
+  end
+
+  @doc """
+  Gets the properties of the given node
+  """
+  def node_properties(node_id) do
+    url = @neo4j_url <> "/db/data/node/#{node_id}/properties"
 
     HTTPoison.get!(url, headers)
       |> response_body
