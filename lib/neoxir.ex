@@ -4,8 +4,8 @@ defmodule Neoxir do
   import Neoxir.Request
 
   @moduledoc """
-  Provides functions to play with Neo4j, such as creating nodes, labes,
-  relatiships and retrieve them.
+  Provides functions to play with Neo4j, such as creating nodes, labels,
+  relationships and retrieve them.
   """
 
   @doc """

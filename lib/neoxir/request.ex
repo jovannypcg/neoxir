@@ -19,13 +19,14 @@ defmodule Neoxir.Request do
   def response_body(%{status_code: 200, body: body}), do: body
   def response_body(%{status_code: 201, body: body}), do: body
   def response_body(%{status_code: 204, body: body}), do: body
-  def response_body(%{status_code: 404, body: _}) do
-    {:ok, encoded_value} = %{:error => "Object Not found"}
+  def response_body(%{status_code: _, body: body}) do
+    { :ok, decoded_body } = Poison.decode(body)
+
+    { :ok, encoded_message } = decoded_body["message"]
       |> Poison.encode
 
-    encoded_value
+    encoded_message
   end
-  def response_body(%{status_code: _, body: body}), do: { :error, body }
 
   @doc """
   Gets the ID of the node from a Neo4j response.
